@@ -1,0 +1,7 @@
+{
+  "parent": "create_nocturnal:block/vampire_encased_shaft",
+  "textures": {
+    "casing": "create_nocturnal:block/vampire_casing",
+    "opening": "create_nocturnal:block/vampire_piston/vampire_piston_inner"
+  }
+}

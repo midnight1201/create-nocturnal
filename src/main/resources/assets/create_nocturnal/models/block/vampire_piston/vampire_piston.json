@@ -1,0 +1,49 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"0": "create_nocturnal:block/vampire_piston/vampire_piston_side",
+		"1": "create_nocturnal:block/vampire_casing",
+		"2": "create_nocturnal:block/vampire_piston/vampire_shaft",
+		"3": "create_nocturnal:block/vampire_piston/vampire_piston_inner",
+		"particle": "create_nocturnal:block/vampire_piston/vampire_casing"
+	},
+	"elements": [
+		{
+			"name": "casing",
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"name": "core",
+			"from": [2, 2, 2],
+			"to": [14, 14, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 2, 2]},
+			"faces": {
+				"east": {"uv": [2, 2, 14, 14], "texture": "#3"},
+				"west": {"uv": [2, 2, 14, 14], "texture": "#3"}
+			}
+		},
+		{
+			"name": "rim",
+			"from": [0, 14, 2],
+			"to": [16, 2, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 2, 2]},
+			"faces": {
+				"north": {"uv": [0, 2, 16, 14], "texture": "#3"},
+				"south": {"uv": [0, 2, 16, 14], "texture": "#3"},
+				"up": {"uv": [0, 2, 16, 14], "texture": "#3"},
+				"down": {"uv": [0, 2, 16, 14], "texture": "#3"}
+			}
+		}
+	]
+}

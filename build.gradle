@@ -14,6 +14,7 @@ repositories {
     maven { url = "https://maven.createmod.net" }
     maven { url = "https://mvn.devos.one/snapshots" }
     maven { url = "https://maven.blamejared.com/" }
+    maven { url = "https://cursemaven.com" }
 }
 
 base {
@@ -50,7 +51,7 @@ neoForge {
 
         data {
             data()
-            programArguments.addAll '--mod', project.mod_id, '--server', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
         configureEach {
@@ -80,6 +81,9 @@ dependencies {
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+
+    // Create: Hemodynamics
+    implementation "curse.maven:hemodynamics-1584064:8298543"
 }
 
 // Template variable substitution for neoforge.mods.toml

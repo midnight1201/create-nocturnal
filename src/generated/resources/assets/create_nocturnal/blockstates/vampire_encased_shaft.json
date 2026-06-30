@@ -1,17 +1,17 @@
 {
   "variants": {
     "axis=x": {
-      "model": "create_nocturnal:block/encased_shaft/block_vampire",
+      "model": "create_nocturnal:block/vampire/encased_shaft/block",
       "uvlock": true,
       "x": 90,
       "y": 90
     },
     "axis=y": {
-      "model": "create_nocturnal:block/encased_shaft/block_vampire",
+      "model": "create_nocturnal:block/vampire/encased_shaft/block",
       "uvlock": true
     },
     "axis=z": {
-      "model": "create_nocturnal:block/encased_shaft/block_vampire",
+      "model": "create_nocturnal:block/vampire/encased_shaft/block",
       "uvlock": true,
       "x": 90,
       "y": 180

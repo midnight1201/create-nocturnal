@@ -2,8 +2,8 @@
 	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "create_nocturnal:block/vampire_piston/vampire_piston_bit",
-		"particle": "create_nocturnal:block/vampire_piston/vampire_piston_bit"
+		"1": "create_nocturnal:block/vampire/piston/vampire_piston_bit",
+		"particle": "create_nocturnal:block/vampire/piston/vampire_piston_bit"
 	},
 	"elements": [
 		{

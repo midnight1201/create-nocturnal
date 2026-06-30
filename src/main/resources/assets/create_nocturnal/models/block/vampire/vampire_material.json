@@ -1,0 +1,13 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "casing": "create_nocturnal:block/vampire_casing",
+    "opening": "create_nocturnal:block/vampire/vampire_shaft_inner",
+    "piston_side": "create_nocturnal:block/vampire/piston/vampire_piston_side",
+    "bit": "create_nocturnal:block/vampire/piston/vampire_piston_bit",
+    "cog_inner": "create_nocturnal:block/vampire/encased_cogwheel/vampire_encased_cogwheel_inner",
+    "cog_side": "create_nocturnal:block/vampire/encased_cogwheel/vampire_encased_cogwheel_side",
+    "cog_side_connected": "create_nocturnal:block/vampire/encased_cogwheel/vampire_encased_cogwheel_side_connected",
+    "particle": "#casing"
+  }
+}

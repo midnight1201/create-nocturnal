@@ -5,7 +5,7 @@ import ver.faker.nocturnal.Nocturnal;
 
 public class NocPartialModels {
     public static final PartialModel VAMPIRE_PISTON_BIT =
-            PartialModel.of(Nocturnal.asResource("block/vampire_piston/vampire_piston_bit"));
+            PartialModel.of(Nocturnal.asResource("block/vampire/piston/piston_bit"));
 
     public static void init() {}
 }

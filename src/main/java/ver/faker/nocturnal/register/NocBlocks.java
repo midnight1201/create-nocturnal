@@ -10,6 +10,7 @@ import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedShaftBlo
 import com.simibubi.create.foundation.data.*;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -18,6 +19,8 @@ import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import ver.faker.nocturnal.Nocturnal;
 import ver.faker.nocturnal.content.NocSpriteShifts;
 import ver.faker.nocturnal.content.vampire_piston.VampirePistonBlock;
+
+import static ver.faker.nocturnal.content.NocBlockStateGen.directionalAxisBlockUvLocked;
 
 public class NocBlocks {
 
@@ -35,10 +38,10 @@ public class NocBlocks {
             .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, NocSpriteShifts.VAMPIRE_CASING,
                     (s, f) -> f.getAxis() != s.getValue(EncasedShaftBlock.AXIS))))
             .blockstate((c, p) -> BlockStateGen.axisBlock(c, p, blockState -> p.models()
-                    .getExistingFile(p.modLoc("block/encased_shaft/block_vampire")), true))
+                    .getExistingFile(p.modLoc("block/vampire/encased_shaft/block")), true))
             .transform(EncasingRegistry.addVariantTo(AllBlocks.SHAFT))
             .item()
-            .model(AssetLookup.customBlockItemModel("encased_shaft", "item_vampire"))
+            .model((c, p) -> p.withExistingParent(c.getName(), p.modLoc("block/vampire/encased_shaft/item")))
             .build()
             .register();
 
@@ -48,12 +51,19 @@ public class NocBlocks {
             .properties(BlockBehaviour.Properties::noOcclusion)
             .onRegister(block -> BlockStressValues.CAPACITIES.register(block, () -> 256.0))
             .onRegister(BlockStressValues.setGeneratorSpeed(16))
-            .blockstate((ctx, prov) -> prov.directionalBlock(ctx.getEntry(),
-                    prov.models().getExistingFile(
-                            Nocturnal.asResource("block/vampire_piston/vampire_piston"))))
+            .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(NocSpriteShifts.VAMPIRE_CASING)))
+            .onRegister(CreateRegistrate.casingConnectivity((block, cc) -> cc.make(block, NocSpriteShifts.VAMPIRE_CASING,
+                    (state, face) -> {
+                        Direction.Axis pipeAxis = state.getValue(VampirePistonBlock.FACING).getAxis();
+                        Direction.Axis shaftAxis = block.getRotationAxis(state);
+                        return face.getAxis() != pipeAxis && face.getAxis() != shaftAxis;
+                    })))
+            .blockstate((ctx, prov) -> directionalAxisBlockUvLocked(ctx, prov,
+                    (state, vertical) -> prov.models().getExistingFile(
+                            Nocturnal.asResource("block/vampire/piston/" + (vertical ? "vertical" : "horizontal")))))
             .item()
             .model((ctx, prov) -> prov.withExistingParent(ctx.getName(),
-                    Nocturnal.asResource("block/vampire_piston/vampire_piston")))
+                    Nocturnal.asResource("block/vampire/piston/item")))
             .build()
             .register();
 

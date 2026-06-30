@@ -1,0 +1,69 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "create_nocturnal:block/vampire/vampire_material",
+	"textures": {
+		"2": "#piston_side",
+		"3": "#casing",
+		"4": "#opening"
+	},
+	"elements": [
+		{
+			"name": "Bottom",
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
+			"faces": {
+				"north": {"uv": [0, 14, 16, 16], "texture": "#3"},
+				"east": {"uv": [0, 14, 16, 16], "texture": "#3"},
+				"south": {"uv": [0, 14, 16, 16], "texture": "#3"},
+				"west": {"uv": [0, 14, 16, 16], "texture": "#3"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#3"}
+			}
+		},
+		{
+			"name": "Core",
+			"from": [1.95, 2, 1],
+			"to": [14.05, 14, 15],
+			"faces": {
+				"east": {"uv": [1, 2, 15, 14], "texture": "#4"},
+				"west": {"uv": [1, 2, 15, 14], "texture": "#4"}
+			}
+		},
+		{
+			"name": "Top",
+			"from": [0, 14, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 2], "texture": "#3"},
+				"east": {"uv": [0, 0, 16, 2], "texture": "#3"},
+				"south": {"uv": [0, 0, 16, 2], "texture": "#3"},
+				"west": {"uv": [0, 0, 16, 2], "texture": "#3"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#3"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#4"}
+			}
+		},
+		{
+			"name": "SideWest",
+			"from": [0, 2, 0],
+			"to": [16, 14, 2],
+			"faces": {
+				"north": {"uv": [16, 14, 0, 2], "rotation": 180, "texture": "#2"},
+				"east": {"uv": [14, 2, 16, 14], "texture": "#3"},
+				"south": {"uv": [0, 2, 16, 14], "rotation": 180, "texture": "#4"},
+				"west": {"uv": [0, 2, 2, 14], "texture": "#3"}
+			}
+		},
+		{
+			"name": "SideEast",
+			"from": [0, 2, 14],
+			"to": [16, 14, 16],
+			"faces": {
+				"north": {"uv": [0, 2, 16, 14], "texture": "#4"},
+				"east": {"uv": [0, 2, 2, 14], "texture": "#3"},
+				"south": {"uv": [0, 2, 16, 14], "texture": "#2"},
+				"west": {"uv": [14, 2, 16, 14], "texture": "#3"}
+			}
+		}
+	]
+}

@@ -41,6 +41,9 @@ public class Nocturnal {
         modBus.addListener(this::onCommonSetup);
         modBus.addListener(this::onClientSetup);
         modBus.addListener(NocBlocks::addValidEncasedShaftBlocks);
+        modBus.addListener(NocBlockEntities::registerCapabilities);
+
+        Nocturnal.REGISTRATE.addRawLang("itemGroup.create_nocturnal", "Nocturnal");
     }
 
     public static ResourceLocation asResource(String path) {

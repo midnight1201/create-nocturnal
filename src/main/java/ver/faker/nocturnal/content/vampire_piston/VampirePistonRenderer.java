@@ -28,17 +28,17 @@ public class VampirePistonRenderer extends KineticBlockEntityRenderer<VampirePis
     @Override
     protected void renderSafe(VampirePistonBlockEntity be, float partialTicks, PoseStack ms,
                               MultiBufferSource buffer, int light, int overlay) {
-        super.renderSafe(be, partialTicks, ms, buffer, light, overlay); // now draws just the shaft
-
         BlockState state = be.getBlockState();
+        renderRotatingBuffer(be, getRotatedModel(be, state), ms,
+                buffer.getBuffer(RenderType.solid()), light);
+
         Direction facing = state.getValue(VampirePistonBlock.FACING);
         float off = be.getBitOffset(partialTicks);
-
         SuperByteBuffer bit = CachedBuffers.partial(NocPartialModels.VAMPIRE_PISTON_BIT, state);
         bit.center()
                 .rotateToFace(facing)
                 .uncenter()
-                .translate(facing.getStepX() * off, facing.getStepY() * off, facing.getStepZ() * off)
+                .translate(0, 0, -off)
                 .light(light)
                 .renderInto(ms, buffer.getBuffer(RenderType.solid()));
     }

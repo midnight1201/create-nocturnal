@@ -1,56 +1,64 @@
 {
   "variants": {
     "axis_along_first=false,facing=down": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston",
-      "x": 180
+      "model": "create_nocturnal:block/vampire/piston/horizontal",
+      "uvlock": true,
+      "x": 270,
+      "y": 90
     },
     "axis_along_first=false,facing=east": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston",
-      "x": 90,
-      "y": 90
+      "model": "create_nocturnal:block/vampire/piston/horizontal",
+      "uvlock": true,
+      "y": 270
     },
     "axis_along_first=false,facing=north": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston",
-      "x": 90
-    },
-    "axis_along_first=false,facing=south": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston",
-      "x": 90,
+      "model": "create_nocturnal:block/vampire/piston/vertical",
+      "uvlock": true,
       "y": 180
     },
+    "axis_along_first=false,facing=south": {
+      "model": "create_nocturnal:block/vampire/piston/vertical",
+      "uvlock": true
+    },
     "axis_along_first=false,facing=up": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston"
-    },
-    "axis_along_first=false,facing=west": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston",
-      "x": 90,
-      "y": 270
-    },
-    "axis_along_first=true,facing=down": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston",
-      "x": 180
-    },
-    "axis_along_first=true,facing=east": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston",
+      "model": "create_nocturnal:block/vampire/piston/horizontal",
+      "uvlock": true,
       "x": 90,
       "y": 90
     },
-    "axis_along_first=true,facing=north": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston",
-      "x": 90
+    "axis_along_first=false,facing=west": {
+      "model": "create_nocturnal:block/vampire/piston/horizontal",
+      "uvlock": true,
+      "y": 90
     },
-    "axis_along_first=true,facing=south": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston",
-      "x": 90,
+    "axis_along_first=true,facing=down": {
+      "model": "create_nocturnal:block/vampire/piston/horizontal",
+      "uvlock": true,
+      "x": 270
+    },
+    "axis_along_first=true,facing=east": {
+      "model": "create_nocturnal:block/vampire/piston/vertical",
+      "uvlock": true,
+      "y": 270
+    },
+    "axis_along_first=true,facing=north": {
+      "model": "create_nocturnal:block/vampire/piston/horizontal",
+      "uvlock": true,
       "y": 180
     },
+    "axis_along_first=true,facing=south": {
+      "model": "create_nocturnal:block/vampire/piston/horizontal",
+      "uvlock": true
+    },
     "axis_along_first=true,facing=up": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston"
+      "model": "create_nocturnal:block/vampire/piston/horizontal",
+      "uvlock": true,
+      "x": 90
     },
     "axis_along_first=true,facing=west": {
-      "model": "create_nocturnal:block/vampire_piston/vampire_piston",
-      "x": 90,
-      "y": 270
+      "model": "create_nocturnal:block/vampire/piston/vertical",
+      "uvlock": true,
+      "y": 90
     }
   }
 }

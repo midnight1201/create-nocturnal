@@ -1,0 +1,10 @@
+{
+  "parent": "create:block/encased_cogwheel/block_top_bottom",
+  "textures": {
+    "1": "create_nocturnal:block/stripped_blood_log_top",
+    "4": "create_nocturnal:block/blood_gearbox",
+    "casing": "create_nocturnal:block/blood_casing",
+    "particle": "create_nocturnal:block/blood_casing",
+    "side": "create_nocturnal:block/blood_encased_cogwheel_side"
+  }
+}

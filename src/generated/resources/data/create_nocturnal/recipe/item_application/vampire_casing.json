@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "create_nocturnal:blood_casing"
+    },
+    {
+      "item": "create_nocturnal:carbon_sheet"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_nocturnal:vampire_casing"
+    }
+  ]
+}

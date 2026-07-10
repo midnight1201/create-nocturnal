@@ -1,0 +1,13 @@
+{
+  "type": "create:haunting",
+  "ingredients": [
+    {
+      "item": "create_nocturnal:flesh_mass"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_nocturnal:flesh_host"
+    }
+  ]
+}

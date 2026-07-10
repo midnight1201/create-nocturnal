@@ -1,7 +1,22 @@
 {
+  "block.create_nocturnal.blood_casing": "buısɐƆ pooןᗺ",
+  "block.create_nocturnal.blood_encased_cogwheel": "ןǝǝɥʍboƆ pǝsɐɔuƎ pooןᗺ",
+  "block.create_nocturnal.blood_encased_large_cogwheel": "ןǝǝɥʍboƆ ǝbɹɐꞀ pǝsɐɔuƎ pooןᗺ",
+  "block.create_nocturnal.blood_encased_shaft": "ʇɟɐɥS pǝsɐɔuƎ pooןᗺ",
+  "block.create_nocturnal.blood_planks": "sʞuɐןԀ pooןᗺ",
+  "block.create_nocturnal.eyed_meat_block": "ʞɔoןᗺ ʇɐǝW pǝʎƎ",
+  "block.create_nocturnal.meat_block": "ʞɔoןᗺ ʇɐǝW",
   "block.create_nocturnal.vampire_casing": "buısɐƆ ǝɹıdɯɐΛ",
+  "block.create_nocturnal.vampire_encased_fluid_pipe": "ǝdıԀ pınןℲ pǝsɐɔuƎ ǝɹıdɯɐΛ",
   "block.create_nocturnal.vampire_encased_shaft": "ʇɟɐɥS pǝsɐɔuƎ ǝɹıdɯɐΛ",
   "block.create_nocturnal.vampire_piston": "uoʇsıԀ ǝɹıdɯɐΛ",
-  "itemGroup.create_nocturnal": "ןɐuɹnʇɔoN",
+  "item.create_nocturnal.animal_lung": "bunꞀ ןɐɯıuⱯ",
+  "item.create_nocturnal.carbon_sheet": "ʇǝǝɥS uoqɹɐƆ",
+  "item.create_nocturnal.flesh_host": "ʇsoH ɥsǝןℲ",
+  "item.create_nocturnal.flesh_mass": "ssɐW ɥsǝןℲ",
+  "item.create_nocturnal.powdered_carbon": "uoqɹɐƆ pǝɹǝpʍoԀ",
+  "item.create_nocturnal.sanguine_steel_ingot": "ʇobuI ןǝǝʇS ǝuınbuɐS",
+  "item.create_nocturnal.unprocessed_carbon_sheet": "ʇǝǝɥS uoqɹɐƆ pǝssǝɔoɹdu∩",
+  "itemGroup.create_nocturnal": "ןɐuɹnʇɔoN :ǝʇɐǝɹƆ",
   "itemGroup.create_nocturnal.main_tab": "qɐ⟘ uıɐW"
 }

@@ -1,0 +1,60 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "c:dusts/coal"
+  },
+  "results": [
+    {
+      "id": "create_nocturnal:carbon_sheet"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "create_nocturnal:unprocessed_carbon_sheet"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 500,
+          "fluid": "hemodynamics:blood"
+        }
+      ],
+      "results": [
+        {
+          "id": "create_nocturnal:unprocessed_carbon_sheet"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "create_nocturnal:unprocessed_carbon_sheet"
+        }
+      ],
+      "results": [
+        {
+          "id": "create_nocturnal:unprocessed_carbon_sheet"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "create_nocturnal:unprocessed_carbon_sheet"
+        }
+      ],
+      "results": [
+        {
+          "id": "create_nocturnal:unprocessed_carbon_sheet"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "create_nocturnal:unprocessed_carbon_sheet"
+  }
+}

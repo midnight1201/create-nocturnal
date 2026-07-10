@@ -21,6 +21,7 @@ public class VampirePistonBlock extends DirectionalAxisKineticBlock implements I
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
         if (oldState.getBlock() == state.getBlock() || isMoving)
             super.onPlace(state, level, pos, oldState, isMoving);
+        withBlockEntityDo(level, pos, be -> VampirePistonBlockEntity.syncDirectionFromNeighbor(be, level, state));
         withBlockEntityDo(level, pos, VampirePistonBlockEntity::updateConnectivity);
     }
 

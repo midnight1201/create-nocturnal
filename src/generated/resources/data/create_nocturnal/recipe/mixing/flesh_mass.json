@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:foods/raw_meat"
+    },
+    {
+      "tag": "c:foods/raw_meat"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "hemodynamics:blood"
+    }
+  ],
+  "results": [
+    {
+      "id": "create_nocturnal:flesh_mass"
+    }
+  ]
+}

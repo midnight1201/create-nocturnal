@@ -1,0 +1,7 @@
+{
+  "parent": "create:block/belt_cover/andesite_belt_cover_x",
+  "textures": {
+    "0": "create_nocturnal:block/belt/blood_funnel_frame",
+    "1": "create_nocturnal:block/belt/blood_belt_cover"
+  }
+}

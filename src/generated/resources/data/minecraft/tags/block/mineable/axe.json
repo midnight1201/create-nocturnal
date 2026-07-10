@@ -1,5 +1,7 @@
 {
   "values": [
-    "create_nocturnal:vampire_casing"
+    "create_nocturnal:blood_casing",
+    "create_nocturnal:vampire_casing",
+    "create_nocturnal:vampire_encased_fluid_pipe"
   ]
 }

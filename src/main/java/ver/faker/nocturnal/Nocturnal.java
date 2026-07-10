@@ -32,18 +32,18 @@ public class Nocturnal {
     public Nocturnal(IEventBus modBus) {
         REGISTRATE.registerEventListeners(modBus);
 
-        NocCreativeModeTabs.register();
+        NocCreativeModeTabs.register(modBus);
         REGISTRATE.setCreativeTab(NocCreativeModeTabs.MAIN_TAB);
-        NocItems.register();
         NocBlocks.register();
+        NocItems.register();
         NocBlockEntities.register();
 
         modBus.addListener(this::onCommonSetup);
         modBus.addListener(this::onClientSetup);
-        modBus.addListener(NocBlocks::addValidEncasedShaftBlocks);
+        modBus.addListener(NocBlocks::addValidEncasedBlocks);
         modBus.addListener(NocBlockEntities::registerCapabilities);
 
-        Nocturnal.REGISTRATE.addRawLang("itemGroup.create_nocturnal", "Nocturnal");
+        Nocturnal.REGISTRATE.addRawLang("itemGroup.create_nocturnal", "Create: Nocturnal");
     }
 
     public static ResourceLocation asResource(String path) {

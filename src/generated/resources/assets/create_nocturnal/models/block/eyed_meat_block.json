@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "create_nocturnal:block/eyed_meat_block"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "create:block/encased_shaft/block",
+  "textures": {
+    "casing": "create_nocturnal:block/blood_casing",
+    "opening": "create_nocturnal:block/blood_gearbox"
+  }
+}

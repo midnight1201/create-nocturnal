@@ -5,7 +5,8 @@
 	"textures": {
 		"2": "#piston_side",
 		"3": "#casing",
-		"4": "#opening"
+		"4": "#opening",
+		"casing": "create_nocturnal:block/vampire/piston/vampire_piston_top"
 	},
 	"elements": [
 		{

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "create_nocturnal:vampire_casing"
+    },
+    "H": {
+      "item": "create_nocturnal:flesh_host"
+    },
+    "L": {
+      "item": "create_nocturnal:animal_lung"
+    },
+    "P": {
+      "item": "create_nocturnal:carbon_sheet"
+    },
+    "S": {
+      "item": "create:shaft"
+    }
+  },
+  "pattern": [
+    " S ",
+    "LCH",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "create_nocturnal:vampire_piston"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "create_nocturnal:vampire_piston"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vampire_casing": {
+      "conditions": {
+        "items": [
+          {
+            "items": "create_nocturnal:vampire_casing"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_vampire_casing"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "create_nocturnal:vampire_piston"
+    ]
+  }
+}

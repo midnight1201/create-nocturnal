@@ -1,7 +1,22 @@
 {
+  "block.create_nocturnal.blood_casing": "Blood Casing",
+  "block.create_nocturnal.blood_encased_cogwheel": "Blood Encased Cogwheel",
+  "block.create_nocturnal.blood_encased_large_cogwheel": "Blood Encased Large Cogwheel",
+  "block.create_nocturnal.blood_encased_shaft": "Blood Encased Shaft",
+  "block.create_nocturnal.blood_planks": "Blood Planks",
+  "block.create_nocturnal.eyed_meat_block": "Eyed Meat Block",
+  "block.create_nocturnal.meat_block": "Meat Block",
   "block.create_nocturnal.vampire_casing": "Vampire Casing",
+  "block.create_nocturnal.vampire_encased_fluid_pipe": "Vampire Encased Fluid Pipe",
   "block.create_nocturnal.vampire_encased_shaft": "Vampire Encased Shaft",
   "block.create_nocturnal.vampire_piston": "Vampire Piston",
-  "itemGroup.create_nocturnal": "Nocturnal",
+  "item.create_nocturnal.animal_lung": "Animal Lung",
+  "item.create_nocturnal.carbon_sheet": "Carbon Sheet",
+  "item.create_nocturnal.flesh_host": "Flesh Host",
+  "item.create_nocturnal.flesh_mass": "Flesh Mass",
+  "item.create_nocturnal.powdered_carbon": "Powdered Carbon",
+  "item.create_nocturnal.sanguine_steel_ingot": "Sanguine Steel Ingot",
+  "item.create_nocturnal.unprocessed_carbon_sheet": "Unprocessed Carbon Sheet",
+  "itemGroup.create_nocturnal": "Create: Nocturnal",
   "itemGroup.create_nocturnal.main_tab": "Main Tab"
 }

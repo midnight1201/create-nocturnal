@@ -23,6 +23,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -53,6 +55,7 @@ public class VampirePistonBlockEntity extends GeneratingKineticBlockEntity imple
     protected int length = 1;
     protected boolean updateConnectivity = false;
     protected boolean updateCapability = false;
+    private boolean pendingSplit = false;
 
     protected ScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
 
@@ -86,6 +89,23 @@ public class VampirePistonBlockEntity extends GeneratingKineticBlockEntity imple
         ConnectivityHandler.formMulti(this);
     }
 
+    private void onShaftAxisChanged() {
+        if (level == null || level.isClientSide) return;
+        pendingSplit = true;
+    }
+
+    @Override
+    public void setBlockState(BlockState state) {
+        BlockState oldState = getBlockState();
+        super.setBlockState(state);
+
+        if (level == null || level.isClientSide || oldState.getBlock() != state.getBlock()) return;
+
+        VampirePistonBlock block = (VampirePistonBlock) state.getBlock();
+        if (block.getRotationAxis(oldState) != block.getRotationAxis(state))
+            onShaftAxisChanged();
+    }
+
     void refreshCapability() {
         fluidCapability = handlerForCapability();
         invalidateCapabilities();
@@ -114,6 +134,52 @@ public class VampirePistonBlockEntity extends GeneratingKineticBlockEntity imple
             if (level.getBlockEntity(controller.getBlockPos().relative(axis, i)) instanceof VampirePistonBlockEntity be
                     && be.movementDirection.getValue() != v)
                 be.movementDirection.setValue(v);
+    }
+
+    public static void syncDirectionFromNeighbor(VampirePistonBlockEntity be, Level level, BlockState state) {
+        if (level.isClientSide) return;
+
+        VampirePistonBlock block = (VampirePistonBlock) state.getBlock();
+        Direction.Axis shaft = block.getRotationAxis(state);
+        BlockPos pos = be.getBlockPos();
+
+        for (Direction dir : Direction.values()) {
+            if (dir.getAxis() != shaft) continue;
+
+            BlockEntity neighbor = level.getBlockEntity(pos.relative(dir));
+            if (!(neighbor instanceof VampirePistonBlockEntity neighborBE)) continue;
+
+            VampirePistonBlockEntity line = neighborBE.isController() ? neighborBE : neighborBE.getControllerBE();
+            if (line == null) continue;
+
+            be.movementDirection.setValue(line.movementDirection.getValue());
+            return;
+        }
+    }
+
+    private void adoptDirectionFromLine() {
+        if (level == null) return;
+
+        Direction.Axis axis = getMainConnectionAxis();
+        for (int i = 0; i < getHeight(); i++) {
+            BlockPos pos = getBlockPos().relative(axis, i);
+            if (level.getBlockEntity(pos) instanceof VampirePistonBlockEntity be && be != this) {
+                movementDirection.setValue(be.movementDirection.getValue());
+                return;
+            }
+        }
+    }
+
+    private void syncDirectionToParts() {
+        if (level == null || !isController()) return;
+
+        int dir = movementDirection.getValue();
+        Direction.Axis axis = getMainConnectionAxis();
+        for (int i = 0; i < getHeight(); i++) {
+            BlockPos pos = getBlockPos().relative(axis, i);
+            if (level.getBlockEntity(pos) instanceof VampirePistonBlockEntity be)
+                be.movementDirection.setValue(dir);
+        }
     }
 
     // ---- Generation ----
@@ -152,13 +218,71 @@ public class VampirePistonBlockEntity extends GeneratingKineticBlockEntity imple
 
     // ---- Tick ----
 
+    private void validateController() {
+        if (isController() || level == null || level.isClientSide) return;
+
+        if (controller == null
+                || !level.isLoaded(controller)
+                || !(level.getBlockEntity(controller) instanceof VampirePistonBlockEntity)) {
+            removeController(true);
+            updateConnectivity();
+        }
+    }
+
+    private void validateMultiblockIntegrity() {
+        if (level == null || level.isClientSide) return;
+
+        if (isController()) {
+            Direction.Axis axis = getMainConnectionAxis();
+            for (int i = 0; i < length; i++) {
+                BlockPos pos = getBlockPos().relative(axis, i);
+                if (!(level.getBlockEntity(pos) instanceof VampirePistonBlockEntity be)
+                        || be.getMainConnectionAxis() != axis
+                        || (!be.isController() && !getBlockPos().equals(be.getController()))) {
+                    ConnectivityHandler.splitMulti(this);
+                    return;
+                }
+            }
+            return;
+        }
+
+        VampirePistonBlockEntity c = getControllerBE();
+        if (c == null) return;
+
+        Direction.Axis axis = c.getMainConnectionAxis();
+        int offset = switch (axis) {
+            case X -> getBlockPos().getX() - c.getBlockPos().getX();
+            case Y -> getBlockPos().getY() - c.getBlockPos().getY();
+            case Z -> getBlockPos().getZ() - c.getBlockPos().getZ();
+        };
+        if (getMainConnectionAxis() != axis
+                || offset < 0 || offset >= c.getHeight()
+                || !getBlockPos().equals(c.getBlockPos().relative(axis, offset))) {
+            removeController(true);
+            updateConnectivity();
+        }
+    }
+
     @Override
     public void tick() {
         super.tick();
-        if (updateCapability) { updateCapability = false; refreshCapability(); }
-        if (updateConnectivity) updateConnectivity();
 
-        // bit bob follows shaft rpm (eased so it spins up / winds down smoothly)
+        if (pendingSplit) {
+            pendingSplit = false;
+            ConnectivityHandler.splitMulti(this);
+        }
+
+        validateController();
+        validateMultiblockIntegrity();
+
+        if (updateCapability) {
+            updateCapability = false;
+            refreshCapability();
+        }
+        if (updateConnectivity)
+            updateConnectivity();
+
+        // bit bob follows shaft rpm (eased, so it spins up / winds down smoothly)
         prevCrankAngle = crankAngle;
         easedRpm = Mth.lerp(RPM_EASING, easedRpm, getSpeed());
         crankAngle += easedRpm * RAD_PER_TICK_PER_RPM * PUMP_RATIO;
@@ -215,7 +339,7 @@ public class VampirePistonBlockEntity extends GeneratingKineticBlockEntity imple
 
         if (isController()) {
             length = compound.getInt("Length");
-            tankInventory.setCapacity(CAPACITY_PER_BLOCK);
+            tankInventory.setCapacity(length * CAPACITY_PER_BLOCK);
             tankInventory.readFromNBT(registries, compound.getCompound("TankContent"));
             if (tankInventory.getSpace() < 0)
                 tankInventory.drain(-tankInventory.getSpace(), IFluidHandler.FluidAction.EXECUTE);
@@ -251,12 +375,27 @@ public class VampirePistonBlockEntity extends GeneratingKineticBlockEntity imple
     // ---- IMultiBlockEntityContainer.Fluid ----
 
     @Override public boolean hasTank() { return true; }
-    @Override public int getTankSize(int tank) { return tankInventory.getCapacity(); }
-    @Override public void setTankSize(int tank, int blocks) {
-        tankInventory.setCapacity(CAPACITY_PER_BLOCK);   // single shared buffer
+
+    @Override
+    public int getTankSize(int tank) {
+        return CAPACITY_PER_BLOCK;
+    }
+    private void applyFluidTankSize(int blocks) {
+        tankInventory.setCapacity(blocks * CAPACITY_PER_BLOCK);
+        int overflow = tankInventory.getFluidAmount() - tankInventory.getCapacity();
+        if (overflow > 0)
+            tankInventory.drain(overflow, IFluidHandler.FluidAction.EXECUTE);
+    }
+    @Override
+    public void setTankSize(int tank, int blocks) {
+        applyFluidTankSize(blocks);
     }
     @Override public IFluidTank getTank(int tank) { return tankInventory; }
-    @Override public FluidStack getFluid(int tank) { return tankInventory.getFluid(); }
+
+    @Override
+    public FluidStack getFluid(int tank) {
+        return tankInventory.getFluid().copy();
+    }
 
     @Override public Direction.Axis getMainConnectionAxis() {
         return ((VampirePistonBlock) getBlockState().getBlock()).getRotationAxis(getBlockState());  // shaft axis
@@ -284,20 +423,42 @@ public class VampirePistonBlockEntity extends GeneratingKineticBlockEntity imple
         setChanged();
         sendData();
     }
-    @Override public void removeController(boolean keepContents) {
-        assert level != null;
-        if (level.isClientSide) return;
+    @Override
+    public void removeController(boolean keepContents) {
+        if (level == null || level.isClientSide) return;
+
         updateConnectivity = true;
+
+        if (!keepContents)
+            applyFluidTankSize(1);  // shrink to single-block capacity + drain overflow
+
         controller = null;
         length = 1;
         reActivateSource = true;
+
+        onFluidChanged(tankInventory.getFluid());  // refresh generator state
+
         refreshCapability();
         setChanged();
         sendData();
     }
     @Override public BlockPos getLastKnownPos() { return lastKnownPos; }
     @Override public void preventConnectivityUpdate() { updateConnectivity = false; }
-    @Override public void notifyMultiUpdated() { reActivateSource = true; setChanged(); }
+    @Override
+    public void notifyMultiUpdated() {
+        if (level != null && !level.isClientSide) {
+            if (isController()) {
+                adoptDirectionFromLine();
+                syncDirectionToParts();
+            } else {
+                VampirePistonBlockEntity c = getControllerBE();
+                if (c != null)
+                    movementDirection.setValue(c.movementDirection.getValue());
+            }
+        }
+        reActivateSource = true;
+        setChanged();
+    }
 
     // ---- Value box (CW/CCW toggle on bare casing faces) ----
 
